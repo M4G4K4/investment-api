@@ -1,4 +1,4 @@
-package com.investment.resources;
+package com.investment.resources.Stock;
 
 import com.investment.entity.Stock;
 
@@ -9,13 +9,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/example")
+@Path("/stock")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ExampleResource {
+public class StockResource {
 
     @GET
-    public String hello() {
-        return "Hello RESTEasy";
+    public List<Stock> list() {
+        return Stock.listAll();
     }
 }
