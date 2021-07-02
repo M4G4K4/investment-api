@@ -1,5 +1,6 @@
 package com.investment.Mapper;
 
+import com.investment.Dto.User.UserList;
 import com.investment.Dto.User.UserRead;
 import com.investment.Entity.User;
 
@@ -10,6 +11,7 @@ public class UserMapper {
 
     public UserRead usertoUserRead(final User user){
         UserRead userRead = new UserRead();
+        userRead.setId(user.getId());
         userRead.setName(user.getName());
         userRead.setEmail(user.getEmail());
         userRead.setUsername(user.getUsername());

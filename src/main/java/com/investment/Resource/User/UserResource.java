@@ -17,14 +17,14 @@ import java.util.List;
 public class UserResource {
 
     @Inject
-    private UserService userService;
+    UserService userService;
 
     @Inject
-    private UserUtils userUtils;
+    UserUtils userUtils;
 
     @GET
-    public List<User> list() {
-        return User.listAll();
+    public Response list() {
+        return Response.ok(userService.getUsers()).build();
     }
 
     @GET

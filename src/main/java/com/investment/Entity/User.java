@@ -4,9 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -25,6 +23,14 @@ public class User extends PanacheEntity {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    public Long getId() {
+        return id;
+    }
+
+    public User setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;

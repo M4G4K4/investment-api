@@ -1,21 +1,34 @@
 package com.investment.Service;
 
+import com.investment.Dto.User.UserList;
 import com.investment.Dto.User.UserLogin;
 import com.investment.Dto.User.UserRead;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
 import com.investment.Mapper.UserMapper;
 import io.quarkus.elytron.security.common.BcryptUtil;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserService {
 
     @Inject
-    private UserMapper mapper;
+    UserMapper mapper;
+
+    @Transactional
+    public UserList getUsers() {
+        final PanacheQuery<User> users = User.findAll();
+        final List<UserRead> list = users.stream().map(mapper::usertoUserRead).collect(Collectors.toList());
+        UserList userList = new UserList();
+        userList.setUsers(list);
+        return userList;
+    }
 
     @Transactional
     public User loginUser(UserLogin userLogin){
@@ -44,4 +57,5 @@ public class UserService {
         user.persist();
         return user;
     }
+
 }
