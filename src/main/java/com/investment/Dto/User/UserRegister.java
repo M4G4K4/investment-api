@@ -1,6 +1,6 @@
-package com.investment.dto;
+package com.investment.Dto.User;
 
-public class UserRead {
+public class UserRegister {
     private String name;
     public String email;
     public String username;

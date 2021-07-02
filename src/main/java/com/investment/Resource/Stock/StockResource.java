@@ -1,6 +1,6 @@
-package com.investment.resources.Stock;
+package com.investment.Resource.Stock;
 
-import com.investment.entity.Stock;
+import com.investment.Entity.Stock;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

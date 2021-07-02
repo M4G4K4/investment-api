@@ -1,4 +1,4 @@
-package com.investment.service;
+package com.investment.Service;
 
 import javax.enterprise.context.ApplicationScoped;
 

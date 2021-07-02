@@ -1,4 +1,4 @@
-package com.investment.entity;
+package com.investment.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.hibernate.annotations.CreationTimestamp;

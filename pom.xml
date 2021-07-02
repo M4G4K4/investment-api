@@ -37,6 +37,11 @@
             <artifactId>quarkus-hibernate-orm</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-security-jpa</artifactId>
+        </dependency>
+
         <!-- JDBC driver dependencies -->
         <dependency>
             <groupId>io.quarkus</groupId>

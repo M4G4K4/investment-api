@@ -1,8 +1,8 @@
-package com.investment.resources.User;
+package com.investment.Resource.User;
 
-import com.investment.dto.UserRead;
-import com.investment.entity.User;
-import com.investment.service.UserService;
+import com.investment.Dto.User.UserRegister;
+import com.investment.Entity.User;
+import com.investment.Service.UserService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -19,6 +19,9 @@ public class UserResource {
     @Inject
     private UserService userService;
 
+    @Inject
+    private UserUtils userUtils;
+
     @GET
     public List<User> list() {
         return User.listAll();
@@ -31,7 +34,13 @@ public class UserResource {
     }
 
     @POST
-    public Response register(@Valid UserRead userRead){
-        return Response.ok(userService.registerUser(userRead)).build();
+    public Response register(@Valid UserRegister userRegister){
+        return Response.ok(userService.registerUser(userRegister)).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Response update(@PathParam("id") final long id, @Valid UserRegister userRegister){
+        return Response.ok(userService.updateUser(id, userRegister)).build();
     }
 }
