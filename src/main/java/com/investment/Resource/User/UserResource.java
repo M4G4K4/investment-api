@@ -1,5 +1,6 @@
 package com.investment.Resource.User;
 
+import com.investment.Dto.User.UserLogin;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
 import com.investment.Service.UserService;
@@ -42,5 +43,11 @@ public class UserResource {
     @Path("/{id}")
     public Response update(@PathParam("id") final long id, @Valid UserRegister userRegister){
         return Response.ok(userService.updateUser(id, userRegister)).build();
+    }
+
+    @POST
+    @Path("/login")
+    public Response login(@Valid UserLogin userLogin){
+        return Response.ok(userService.loginUser(userLogin)).build();
     }
 }

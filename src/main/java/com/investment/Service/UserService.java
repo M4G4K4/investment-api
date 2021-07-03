@@ -8,6 +8,11 @@ import com.investment.Entity.User;
 import com.investment.Mapper.UserMapper;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import org.wildfly.security.password.Password;
+import org.wildfly.security.password.PasswordFactory;
+import org.wildfly.security.password.WildFlyElytronPasswordProvider;
+import org.wildfly.security.password.interfaces.BCryptPassword;
+import org.wildfly.security.password.util.ModularCrypt;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,8 +36,13 @@ public class UserService {
     }
 
     @Transactional
-    public User loginUser(UserLogin userLogin){
-
+    public User loginUser(UserLogin userLogin) throws Exception {
+        User user = User.find("email", userLogin.getEmail()).firstResult();
+        if(verifyBCryptPassword(user.getPassword(),userLogin.getPassword())){
+            //returnar exeção
+        }else{
+            // returtnar token
+        }
         return new User();
     }
 
@@ -56,6 +66,19 @@ public class UserService {
         user.setPassword(userRegister.getPassword());
         user.persist();
         return user;
+    }
+
+    public static boolean verifyBCryptPassword(String bCryptPasswordHash, String passwordToVerify) throws Exception {
+        WildFlyElytronPasswordProvider provider = new WildFlyElytronPasswordProvider();
+
+        PasswordFactory passwordFactory = PasswordFactory.getInstance(BCryptPassword.ALGORITHM_BCRYPT, provider);
+
+        Password userPasswordDecoded = ModularCrypt.decode(bCryptPasswordHash);
+
+        Password userPasswordRestored = passwordFactory.translate(userPasswordDecoded);
+
+        return passwordFactory.verify(userPasswordRestored, passwordToVerify.toCharArray());
+
     }
 
 }
