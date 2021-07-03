@@ -8,10 +8,12 @@ import javax.ws.rs.ext.Provider;
 public class CustomExceptionHandler implements ExceptionMapper<CustomException> {
     @Override
     public Response toResponse(CustomException exception) {
-        return Response.status(exception.getErrorCode()).entity(mapperPayload(exception)).build();
+        return Response.status(exception.getError().getErrorCode()).entity(mapperPayload(exception)).build();
     }
 
     private Payload mapperPayload(CustomException exception){
-        return new Payload(exception.getMessage(), exception.getErrorCode(), exception.getDetails());
+        return new Payload(exception.getMessage(),
+                exception.getError().getErrorCode(),
+                exception.getError().getDetails());
     }
 }
