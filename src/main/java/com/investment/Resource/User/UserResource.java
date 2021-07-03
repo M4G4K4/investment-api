@@ -47,7 +47,7 @@ public class UserResource {
 
     @POST
     @Path("/login")
-    public Response login(@Valid UserLogin userLogin){
+    public Response login(@Valid UserLogin userLogin) throws Exception {
         return Response.ok(userService.loginUser(userLogin)).build();
     }
 }

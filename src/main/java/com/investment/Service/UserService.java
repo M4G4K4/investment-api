@@ -5,6 +5,8 @@ import com.investment.Dto.User.UserLogin;
 import com.investment.Dto.User.UserRead;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
+import com.investment.Exception.CustomException;
+import com.investment.Exception.ErrorCode;
 import com.investment.Mapper.UserMapper;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
@@ -39,11 +41,12 @@ public class UserService {
     public User loginUser(UserLogin userLogin) throws Exception {
         User user = User.find("email", userLogin.getEmail()).firstResult();
         if(verifyBCryptPassword(user.getPassword(),userLogin.getPassword())){
-            //returnar exeção
+            // password verified
+            return new User();
         }else{
-            // returtnar token
+            // Wrong password
+            throw new CustomException(ErrorCode.BAD_CREDENTIALS);
         }
-        return new User();
     }
 
     @Transactional
@@ -68,7 +71,7 @@ public class UserService {
         return user;
     }
 
-    public static boolean verifyBCryptPassword(String bCryptPasswordHash, String passwordToVerify) throws Exception {
+    private static boolean verifyBCryptPassword(String bCryptPasswordHash, String passwordToVerify) throws Exception {
         WildFlyElytronPasswordProvider provider = new WildFlyElytronPasswordProvider();
 
         PasswordFactory passwordFactory = PasswordFactory.getInstance(BCryptPassword.ALGORITHM_BCRYPT, provider);
