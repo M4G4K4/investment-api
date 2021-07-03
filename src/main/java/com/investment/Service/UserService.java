@@ -39,8 +39,8 @@ public class UserService {
 
     @Transactional
     public User loginUser(UserLogin userLogin) throws Exception {
-        User user = User.find("email", userLogin.getEmail()).firstResult();
-        if(verifyBCryptPassword(user.getPassword(),userLogin.getPassword())){
+
+        if(verifyBCryptPassword(User.findUserByEmail(userLogin.getEmail()).getPassword(),userLogin.getPassword())){
             // password verified
             return new User();
         }else{

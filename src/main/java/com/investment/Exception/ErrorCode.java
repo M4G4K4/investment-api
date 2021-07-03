@@ -1,7 +1,8 @@
 package com.investment.Exception;
 
 public enum ErrorCode {
-    BAD_CREDENTIALS("Bad credentials provided",401,"email or password are wrong");
+    BAD_CREDENTIALS("Bad credentials provided",401,"email or password are wrong"),
+    USER_NOT_FOUND("User not found",404,"ID or emails are not correct");
 
 
     private String message;

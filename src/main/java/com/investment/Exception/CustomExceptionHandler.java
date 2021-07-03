@@ -12,7 +12,7 @@ public class CustomExceptionHandler implements ExceptionMapper<CustomException> 
     }
 
     private Payload mapperPayload(CustomException exception){
-        return new Payload(exception.getMessage(),
+        return new Payload(exception.getError().getMessage(),
                 exception.getError().getErrorCode(),
                 exception.getError().getDetails());
     }

@@ -14,9 +14,4 @@ public class CustomException extends Exception implements Serializable {
     public ErrorCode getError() {
         return error;
     }
-
-    public CustomException setErrorCode(ErrorCode errorCode) {
-        this.error = errorCode;
-        return this;
-    }
 }

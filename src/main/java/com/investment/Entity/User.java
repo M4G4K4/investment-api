@@ -1,5 +1,7 @@
 package com.investment.Entity;
 
+import com.investment.Exception.CustomException;
+import com.investment.Exception.ErrorCode;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -78,5 +80,15 @@ public class User extends PanacheEntity {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+
+    public static User findUserByEmail(final String email) throws CustomException {
+        User user = User.find("email", email).firstResult();
+        if(user == null){
+            throw new CustomException(ErrorCode.USER_NOT_FOUND);
+        }
+        return user;
     }
 }
