@@ -1,5 +1,7 @@
 package com.investment.Dto.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class UserRegister {
@@ -7,6 +9,7 @@ public class UserRegister {
     private String name;
 
     @NotBlank
+    @Email
     public String email;
 
     public String username;
