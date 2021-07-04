@@ -4,10 +4,15 @@ import java.sql.Timestamp;
 
 public class UserRead {
     private long id;
+
     private String name;
+
     private String email;
+
     private String username;
+
     private Timestamp createdAt;
+
     private Timestamp updatedAt;
 
     public long getId() {

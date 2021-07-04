@@ -1,10 +1,20 @@
 package com.investment.Dto.User;
 
+import javax.validation.constraints.NotBlank;
+
 public class UserRegister {
+
     private String name;
+
+    @NotBlank
     public String email;
+
     public String username;
+
+    @NotBlank
     public String password;
+
+
 
     public String getName() {
         return name;
