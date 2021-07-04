@@ -17,6 +17,8 @@ public class User extends PanacheEntity {
     private String username;
     private String password;
 
+    //TODO: Add roles table
+
     @CreationTimestamp
     @Column(name = "created_at")
     private Timestamp createdAt;
