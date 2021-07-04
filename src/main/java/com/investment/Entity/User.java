@@ -89,13 +89,4 @@ public class User extends PanacheEntity {
     public static User findUserByEmail(final String email) throws CustomException {
         return (User) find("email",email).firstResultOptional().orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND) );
     }
-
-    public static User findUserByEmail2(final String email) throws CustomException {
-        User user = User.find("email", email).firstResult();
-        if(user == null){
-            throw new CustomException(ErrorCode.USER_NOT_FOUND);
-        }
-        return user;
-    }
-
 }

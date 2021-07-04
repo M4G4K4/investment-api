@@ -41,13 +41,6 @@ public class TokenSecuredResource {
         return getResponseString(ctx) + ", birthdate: " + jwt.getClaim("birthdate").toString();
     }
 
-    @GET
-    @Path("token")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String generateToken(@Context SecurityContext ctx) {
-        return token.generateToken();
-    }
-
     private String getResponseString(SecurityContext ctx) {
         String name;
         if (ctx.getUserPrincipal() == null) {

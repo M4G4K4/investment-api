@@ -1,12 +1,14 @@
 package com.investment.Service;
 
 import com.investment.Dto.User.UserLogin;
-import com.investment.Dto.User.UserRead;
+import com.investment.Dto.User.UserLoginResponse;
+import com.investment.Dto.User.UserResponse;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
 import com.investment.Exception.CustomException;
 import com.investment.Exception.ErrorCode;
 import com.investment.Mapper.UserMapper;
+import com.investment.Token.TokenUtils;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.wildfly.security.password.Password;
@@ -28,20 +30,22 @@ public class AuthService {
     @Inject
     JsonWebToken jsonWebToken;
 
+    @Inject
+    TokenUtils tokenUtils;
+
     @Transactional
-    public User loginUser(UserLogin userLogin) throws Exception {
+    public UserLoginResponse loginUser(UserLogin userLogin) throws Exception {
         User user = User.findUserByEmail(userLogin.getEmail());
         if(verifyBCryptPassword(user.getPassword(),userLogin.getPassword())){
-            // password verified
-            return new User();
+            final String token = tokenUtils.generateToken(user);
+            return mapper.userToUserLoginResponse(user, token);
         }else{
-            // Wrong password
             throw new CustomException(ErrorCode.BAD_CREDENTIALS);
         }
     }
 
     @Transactional
-    public UserRead registerUser(UserRegister userRegister){
+    public UserResponse registerUser(UserRegister userRegister){
         User user = new User();
         user.setEmail(userRegister.getEmail());
         user.setUsername(userRegister.getUsername());

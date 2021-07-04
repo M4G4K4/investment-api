@@ -3,13 +3,13 @@ package com.investment.Dto.User;
 import java.util.List;
 
 public class UserList {
-    private List<UserRead> users;
+    private List<UserResponse> users;
 
-    public List<UserRead> getUsers() {
+    public List<UserResponse> getUsers() {
         return users;
     }
 
-    public UserList setUsers(List<UserRead> users) {
+    public UserList setUsers(List<UserResponse> users) {
         this.users = users;
         return this;
     }

@@ -1,12 +1,10 @@
 package com.investment.Service;
 
-import antlr.Token;
 import com.investment.Dto.User.UserList;
-import com.investment.Dto.User.UserRead;
+import com.investment.Dto.User.UserResponse;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
 import com.investment.Mapper.UserMapper;
-import com.investment.Token.TokenUtils;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,13 +19,10 @@ public class UserService {
     @Inject
     UserMapper mapper;
 
-    @Inject
-    TokenUtils tokenUtils;
-
     @Transactional
     public UserList getUsers() {
         final PanacheQuery<User> users = User.findAll();
-        final List<UserRead> list = users.stream().map(mapper::usertoUserRead).collect(Collectors.toList());
+        final List<UserResponse> list = users.stream().map(mapper::usertoUserRead).collect(Collectors.toList());
         UserList userList = new UserList();
         userList.setUsers(list);
         return userList;
@@ -44,9 +39,5 @@ public class UserService {
         user.setPassword(userRegister.getPassword());
         user.persist();
         return user;
-    }
-
-    public String generateToken() {
-       return tokenUtils.generateToken();
     }
 }

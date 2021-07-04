@@ -36,11 +36,5 @@ public class UserResource {
     public Response updateUserById(@PathParam("id") final long id, @Valid UserRegister userRegister){
         return Response.ok(userService.updateUser(id, userRegister)).build();
     }
-
-    @GET
-    @Path("/token")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response generateToken(@Context SecurityContext ctx) {
-        return Response.ok(userService.generateToken()).build();
-    }
+    
 }

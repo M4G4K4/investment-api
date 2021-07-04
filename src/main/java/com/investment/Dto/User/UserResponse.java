@@ -2,7 +2,7 @@ package com.investment.Dto.User;
 
 import java.sql.Timestamp;
 
-public class UserRead {
+public class UserResponse {
     private long id;
 
     private String name;
@@ -19,7 +19,7 @@ public class UserRead {
         return id;
     }
 
-    public UserRead setId(long id) {
+    public UserResponse setId(long id) {
         this.id = id;
         return this;
     }
@@ -28,7 +28,7 @@ public class UserRead {
         return name;
     }
 
-    public UserRead setName(String name) {
+    public UserResponse setName(String name) {
         this.name = name;
         return this;
     }
@@ -37,7 +37,7 @@ public class UserRead {
         return email;
     }
 
-    public UserRead setEmail(String email) {
+    public UserResponse setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -46,7 +46,7 @@ public class UserRead {
         return username;
     }
 
-    public UserRead setUsername(String username) {
+    public UserResponse setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -55,7 +55,7 @@ public class UserRead {
         return createdAt;
     }
 
-    public UserRead setCreatedAt(Timestamp createdAt) {
+    public UserResponse setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -64,7 +64,7 @@ public class UserRead {
         return updatedAt;
     }
 
-    public UserRead setUpdatedAt(Timestamp updatedAt) {
+    public UserResponse setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
