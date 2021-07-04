@@ -1,5 +1,6 @@
 package com.investment.Resource;
 
+import com.investment.Token.TokenUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import javax.annotation.security.PermitAll;
@@ -14,14 +15,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
-import org.eclipse.microprofile.jwt.JsonWebToken;
 
 @Path("/secured")
-@RequestScoped
 public class TokenSecuredResource {
 
     @Inject
     JsonWebToken jwt;
+
+    @Inject
+    TokenUtils token;
 
     @GET()
     @Path("permit-all")
@@ -37,6 +39,13 @@ public class TokenSecuredResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String helloRolesAllowed(@Context SecurityContext ctx) {
         return getResponseString(ctx) + ", birthdate: " + jwt.getClaim("birthdate").toString();
+    }
+
+    @GET
+    @Path("token")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String generateToken(@Context SecurityContext ctx) {
+        return token.generateToken();
     }
 
     private String getResponseString(SecurityContext ctx) {
