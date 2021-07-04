@@ -31,6 +31,7 @@ public class UserService {
 
     @Transactional
     public User updateUser(long id,final UserRegister userRegister) {
+        //TODO Do it with ampper
         User user = User.findById(id);
         user.setEmail(userRegister.getEmail());
         user.setUsername(userRegister.getUsername());

@@ -8,24 +8,30 @@ import com.investment.Exception.CustomException;
 import com.investment.Exception.ErrorCode;
 import com.investment.Mapper.UserMapper;
 import io.quarkus.elytron.security.common.BcryptUtil;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.wildfly.security.password.Password;
 import org.wildfly.security.password.PasswordFactory;
 import org.wildfly.security.password.WildFlyElytronPasswordProvider;
 import org.wildfly.security.password.interfaces.BCryptPassword;
 import org.wildfly.security.password.util.ModularCrypt;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+@RequestScoped
 public class AuthService {
 
     @Inject
     UserMapper mapper;
 
+    @Inject
+    JsonWebToken jsonWebToken;
+
     @Transactional
     public User loginUser(UserLogin userLogin) throws Exception {
-
-        if(verifyBCryptPassword(User.findUserByEmail(userLogin.getEmail()).getPassword(),userLogin.getPassword())){
+        User user = User.findUserByEmail(userLogin.getEmail());
+        if(verifyBCryptPassword(user.getPassword(),userLogin.getPassword())){
             // password verified
             return new User();
         }else{

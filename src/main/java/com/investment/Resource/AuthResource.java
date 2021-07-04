@@ -1,10 +1,11 @@
-package com.investment.Resource.Auth;
+package com.investment.Resource;
 
 import com.investment.Dto.User.UserLogin;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
 import com.investment.Service.AuthService;
 import com.investment.Service.UserService;
+import com.investment.Token.TokenUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import javax.annotation.security.PermitAll;
@@ -21,12 +22,10 @@ import java.util.List;
 public class AuthResource {
 
     @Inject
-    JsonWebToken jsonWebToken;
-
-    @Inject
     AuthService authService;
 
     @POST
+    @Path("/register")
     @PermitAll
     public Response register(@Valid UserRegister userRegister){
         return Response.ok(authService.registerUser(userRegister)).build();
@@ -47,7 +46,10 @@ public class AuthResource {
     }
 
     @GET
-    public String token() {
-        return jsonWebToken.getRawToken();
+    @Path("/generate/{id}")
+    public String cenas(@PathParam("id")final long id){
+        User user = User.findById(id);
+        //return TokenUtils.generate(user);
+        return "s";
     }
 }

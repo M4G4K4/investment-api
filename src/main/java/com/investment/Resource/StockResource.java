@@ -1,4 +1,4 @@
-package com.investment.Resource.Stock;
+package com.investment.Resource;
 
 import com.investment.Entity.Stock;
 

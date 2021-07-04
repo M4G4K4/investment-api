@@ -1,4 +1,4 @@
-package com.investment.Resource.User;
+package com.investment.Resource;
 
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
