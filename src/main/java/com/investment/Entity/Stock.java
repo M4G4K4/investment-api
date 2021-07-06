@@ -24,7 +24,9 @@ public class Stock extends PanacheEntity {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-
+    public Long getId() {
+        return id;
+    }
 
     public String getTicker() {
         return ticker;

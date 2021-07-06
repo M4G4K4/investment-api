@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class UserMapper {
 
-    public UserResponse usertoUserRead(final User user){
+    public UserResponse usertoUserResponse(final User user){
         UserResponse userRead = new UserResponse();
         userRead.setId(user.getId());
         userRead.setName(user.getName());
@@ -18,15 +18,7 @@ public class UserMapper {
         userRead.setCreatedAt(user.getCreatedAt());
         return userRead;
     }
-    private long id;
 
-    private String name;
-
-    private String email;
-
-    private String username;
-
-    private String token;
     public UserLoginResponse userToUserLoginResponse(final User user,final String token) {
         UserLoginResponse response = new UserLoginResponse();
         response.setId(user.getId());

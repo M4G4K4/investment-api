@@ -4,6 +4,8 @@ import com.investment.Dto.User.UserList;
 import com.investment.Dto.User.UserResponse;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
+import com.investment.Exception.CustomException;
+import com.investment.Exception.ErrorCode;
 import com.investment.Mapper.UserMapper;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
@@ -22,17 +24,24 @@ public class UserService {
     @Transactional
     public UserList getUsers() {
         final PanacheQuery<User> users = User.findAll();
-        final List<UserResponse> list = users.stream().map(mapper::usertoUserRead).collect(Collectors.toList());
+        final List<UserResponse> list = users.stream().map(mapper::usertoUserResponse).collect(Collectors.toList());
         UserList userList = new UserList();
         userList.setUsers(list);
         return userList;
     }
 
+    public UserResponse getUserFromId(final long id) throws CustomException {
+        User user = User.findById(id);
+        if(user == null){
+            throw new CustomException(ErrorCode.USER_NOT_FOUND);
+        }
+        return mapper.usertoUserResponse(user);
+    }
+
 
     @Transactional
-    public User updateUser(long id,final UserRegister userRegister) {
-        //TODO Do it with ampper
-        User user = User.findById(id);
+    public User updateUser(long id, final UserRegister userRegister) throws CustomException {
+        User user = User.findUserById(id);
         user.setEmail(userRegister.getEmail());
         user.setUsername(userRegister.getUsername());
         user.setName(userRegister.getName());

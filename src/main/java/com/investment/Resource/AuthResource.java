@@ -44,12 +44,4 @@ public class AuthResource {
         //TODO: return roles/allowed permissions of this user
         return Response.ok().build();
     }
-
-    @GET
-    @Path("/generate/{id}")
-    public String cenas(@PathParam("id")final long id){
-        User user = User.findById(id);
-        //return TokenUtils.generate(user);
-        return "s";
-    }
 }

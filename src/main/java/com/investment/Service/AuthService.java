@@ -52,7 +52,7 @@ public class AuthService {
         user.setName(userRegister.getName());
         user.setPassword(BcryptUtil.bcryptHash(userRegister.getPassword()));
         user.persist();
-        return mapper.usertoUserRead(user);
+        return mapper.usertoUserResponse(user);
     }
 
 
