@@ -3,6 +3,7 @@ package com.investment.Resource;
 import com.investment.Dto.User.UserLogin;
 import com.investment.Dto.User.UserRegister;
 import com.investment.Entity.User;
+import com.investment.Exception.CustomException;
 import com.investment.Service.AuthService;
 import com.investment.Service.UserService;
 import com.investment.Token.TokenUtils;
@@ -27,7 +28,7 @@ public class AuthResource {
     @POST
     @Path("/register")
     @PermitAll
-    public Response register(@Valid UserRegister userRegister){
+    public Response register(@Valid UserRegister userRegister) throws CustomException {
         return Response.ok(authService.registerUser(userRegister)).build();
     }
 

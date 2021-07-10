@@ -17,7 +17,6 @@ public class TokenUtils {
 
     public String generateToken(User user) throws CustomException {
         try{
-            //TODO: set groups with roles of user
             return Jwt.issuer("https://github.com/M4G4K4")
                     .upn(user.getEmail())
                     .subject(user.getId().toString())

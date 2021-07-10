@@ -3,7 +3,8 @@ package com.investment.Exception;
 public enum ErrorCode {
     BAD_CREDENTIALS("Bad credentials provided",401,"email or password are wrong"),
     USER_NOT_FOUND("User not found",404,"ID or emails are not correct"),
-    ERROR_GENERATING_TOKEN("Error generating token",500,"Error when creating token");
+    ERROR_GENERATING_TOKEN("Error generating token",500,"Error when creating token"),
+    EMAIL_ALREADY_EXISTS("Email already exists",400,"Email already registered");
 
 
     private String message;

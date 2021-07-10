@@ -45,7 +45,9 @@ public class AuthService {
     }
 
     @Transactional
-    public UserResponse registerUser(UserRegister userRegister){
+    public UserResponse registerUser(UserRegister userRegister) throws CustomException {
+        valdidateUserUniqueEmail(userRegister.getEmail());
+
         User user = new User();
         user.setEmail(userRegister.getEmail());
         user.setUsername(userRegister.getUsername());
@@ -55,7 +57,11 @@ public class AuthService {
         return mapper.usertoUserResponse(user);
     }
 
-
+    private void valdidateUserUniqueEmail(final String email) throws CustomException {
+        if(User.userExists(email)){
+            throw new CustomException(ErrorCode.EMAIL_ALREADY_EXISTS);
+        }
+    }
 
     private static boolean verifyBCryptPassword(String bCryptPasswordHash, String passwordToVerify) throws Exception {
         WildFlyElytronPasswordProvider provider = new WildFlyElytronPasswordProvider();

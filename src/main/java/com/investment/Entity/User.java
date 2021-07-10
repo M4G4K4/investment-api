@@ -85,6 +85,10 @@ public class User extends PanacheEntity {
     }
 
 
+    public static boolean userExists(final String email) {
+        User user = find("email", email).firstResult();
+        return user != null;
+    }
 
     public static User findUserByEmail(final String email) throws CustomException {
         return (User) find("email", email).firstResultOptional().orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND) );
