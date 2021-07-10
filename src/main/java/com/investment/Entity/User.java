@@ -98,6 +98,23 @@ public class User extends PanacheEntity {
         this.updatedAt = updatedAt;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public User setRoles(List<Role> roles) {
+        this.roles = roles;
+        return this;
+    }
+
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
+    public User setStocks(List<Stock> stocks) {
+        this.stocks = stocks;
+        return this;
+    }
 
     public static boolean userExists(final String email) {
         User user = find("email", email).firstResult();

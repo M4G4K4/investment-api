@@ -1,28 +1,42 @@
 package com.investment.Resource;
 
-import com.investment.Token.TokenUtils;
-import org.eclipse.microprofile.jwt.JsonWebToken;
-
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
 
 
 @Path("/secured")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class TokenSecuredResource {
+
+
+    @GET()
+    @Path("/nice")
+    public String nice() {
+        System.out.println("Helo");
+        return "asd";
+    }
+/*
 
     @Inject
     JsonWebToken jwt;
 
-    @Inject
-    TokenUtils token;
+    @GET()
+    @Path("/cenas")
+    public String asd(@Context SecurityContext ctx) {
+        System.out.println(ctx);
+        System.out.println(ctx.getAuthenticationScheme());
+        System.out.println(ctx.getUserPrincipal());
+        System.out.println(ctx.getUserPrincipal().getName());
+        System.out.println(jwt.getGroups());
+        System.out.println(jwt);
+        System.out.println(jwt.getRawToken());
+        System.out.println(jwt.getIssuer());
+        return getResponseString(ctx);
+    }
 
     @GET()
     @Path("permit-all")
@@ -34,7 +48,7 @@ public class TokenSecuredResource {
 
     @GET
     @Path("roles-allowed")
-    @RolesAllowed({ "User", "Admin" })
+    @RolesAllowed({ "stock:read", "stock:write" })
     @Produces(MediaType.TEXT_PLAIN)
     public String helloRolesAllowed(@Context SecurityContext ctx) {
         return getResponseString(ctx) + ", birthdate: " + jwt.getClaim("birthdate").toString();
@@ -60,4 +74,5 @@ public class TokenSecuredResource {
     private boolean hasJwt() {
         return jwt.getClaimNames() != null;
     }
+    */
 }

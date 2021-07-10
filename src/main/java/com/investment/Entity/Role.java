@@ -15,4 +15,22 @@ public class Role extends PanacheEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public String getName() {
+        return name;
+    }
+
+    public Role setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Role setUser(User user) {
+        this.user = user;
+        return this;
+    }
 }
