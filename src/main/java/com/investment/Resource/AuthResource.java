@@ -2,12 +2,8 @@ package com.investment.Resource;
 
 import com.investment.Dto.User.UserLogin;
 import com.investment.Dto.User.UserRegister;
-import com.investment.Entity.User;
 import com.investment.Exception.CustomException;
 import com.investment.Service.AuthService;
-import com.investment.Service.UserService;
-import com.investment.Token.TokenUtils;
-import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
@@ -15,7 +11,6 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)

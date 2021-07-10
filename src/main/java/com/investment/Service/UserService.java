@@ -1,5 +1,6 @@
 package com.investment.Service;
 
+import com.investment.Dto.User.UserEmail;
 import com.investment.Dto.User.UserList;
 import com.investment.Dto.User.UserResponse;
 import com.investment.Dto.User.UserRegister;
@@ -48,5 +49,11 @@ public class UserService {
         user.setPassword(userRegister.getPassword());
         user.persist();
         return user;
+    }
+
+    @Transactional
+    public Object getUserFromEmail(UserEmail userEmail) throws CustomException {
+        User user = User.findUserByEmail(userEmail.getEmail());
+        return mapper.usertoUserResponse(user);
     }
 }

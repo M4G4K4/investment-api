@@ -8,16 +8,28 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends PanacheEntity {
     private String name;
     private String email;
     private String username;
     private String password;
 
-    //TODO: Add roles table
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Role> roles;
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Stock> stocks;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -26,6 +38,8 @@ public class User extends PanacheEntity {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+
+
 
     public Long getId() {
         return id;

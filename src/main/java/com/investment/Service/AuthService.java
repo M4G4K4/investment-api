@@ -33,6 +33,8 @@ public class AuthService {
     @Inject
     TokenUtils tokenUtils;
 
+    //TODO: implement roles in users
+
     @Transactional
     public UserLoginResponse loginUser(UserLogin userLogin) throws Exception {
         User user = User.findUserByEmail(userLogin.getEmail());

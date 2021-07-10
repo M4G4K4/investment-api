@@ -4,17 +4,19 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "stock")
+@Table(name = "stocks")
 public class Stock extends PanacheEntity {
     private String ticker;
     private String name;
     private String exchange;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -66,5 +68,14 @@ public class Stock extends PanacheEntity {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Stock setUser(User user) {
+        this.user = user;
+        return this;
     }
 }

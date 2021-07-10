@@ -19,7 +19,7 @@ public class UserMapper {
         return userRead;
     }
 
-    public UserLoginResponse userToUserLoginResponse(final User user,final String token) {
+    public UserLoginResponse userToUserLoginResponse(final User user, final String token) {
         UserLoginResponse response = new UserLoginResponse();
         response.setId(user.getId());
         response.setName(user.getName());

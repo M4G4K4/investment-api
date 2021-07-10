@@ -1,7 +1,7 @@
 package com.investment.Resource;
 
 import com.investment.Dto.Stock.StockRead;
-import com.investment.Entity.Stock;
+import com.investment.Exception.CustomException;
 import com.investment.Service.StockService;
 
 import javax.inject.Inject;
@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/stock")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,13 +19,12 @@ public class StockResource {
     StockService stockService;
 
     @GET
-    public List<Stock> list() {
-        //TODO: Refactor to service
-        return Stock.listAll();
+    public Response list() {
+        return Response.ok(stockService.getAllStocks()).build();
     }
 
     @POST
-    public Response insertStock(@Valid StockRead stockRead) {
-        return Response.ok(stockService.insertStock(stockRead)).build();
+    public Response insertStock(@Valid StockRead stockRead, @QueryParam("user")final long id) throws CustomException {
+        return Response.ok(stockService.insertStock(stockRead,id)).build();
     }
 }
